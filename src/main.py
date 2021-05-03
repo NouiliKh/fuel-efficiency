@@ -24,15 +24,22 @@ if __name__ == "__main__":
     # Train baseline model with 1 variable
     # Preprocess
 
-    X, y, normalization_layer = Preprocess(dataset=raw_dataset,
-                                           feature_column=['Horsepower'],
-                                           label_column=['MPG']).fit()
+    preprocessor = Preprocess(dataset=raw_dataset, feature_column=['Horsepower'], label_column=['MPG'])
+    X, y, normalization_layer = preprocessor.fit()
+    X_test, y_test = preprocessor.evaluate()
+    X_prediction = Preprocess.predict(X_test)
 
     # Fit model
+    baseline_1_variable = BaselineModel(normalization_layer)
+    baseline_1_variable.fit(X, y)
+    baseline_1_variable.evaluate(X_test, y_test)
+    baseline_1_variable.predict(X_test)
 
-    # BaselineModel(normalization_layer).fit(X, y)
     # Fit DNN
-    # DNNModel(normalization_layer).fit(X, y)
+    DNN_1_variable = DNNModel(normalization_layer)
+    DNN_1_variable.fit(X, y)
+    DNN_1_variable.evaluate(X_test, y_test)
+
 
     columns_to_use = ['Cylinders', 'Displacement', 'Horsepower', 'Weight', 'Acceleration', 'Model Year', 'Origin']
     # Train baseline model with multi variable

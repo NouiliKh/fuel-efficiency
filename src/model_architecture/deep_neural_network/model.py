@@ -1,12 +1,13 @@
 from tensorflow.keras import layers
 import tensorflow as tf
+from model_architecture.custom_callbacks import ExecutionTimeCallback
 
 
 class Model:
 
     def __init__(self,  normalization_layer):
         self.validation_split = 0.2
-        self.verbose = 1
+        self.verbose = 0
         self.epochs = 100
         self.num_classes = 1
         self.learning_rate = 0.001
@@ -24,4 +25,14 @@ class Model:
         return model
 
     def fit(self, X, y):
-        self.model.fit(X, y, validation_split=self.validation_split, verbose=self.verbose, epochs=self.epochs)
+        custom_callback = ExecutionTimeCallback()
+        self.model.fit(X, y, epochs=self.epochs, verbose=self.verbose, validation_split=self.validation_split
+                       , callbacks=[custom_callback])
+        return custom_callback.history
+
+    def evaluate(self, X, y):
+        history = self.model.evaluate(X, y)
+        return history
+
+    def predict(self, x):
+        return self.model.predict(x)

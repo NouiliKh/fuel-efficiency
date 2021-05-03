@@ -22,6 +22,7 @@ class Database:
 
 
 class CursorFromConnectionPool:
+    # Here I have the possibility to get the connection once every transaction is made or only the first time
     def __init__(self):
         self.conn = None
         self.cursor = None
