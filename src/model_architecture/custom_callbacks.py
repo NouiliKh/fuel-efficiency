@@ -18,3 +18,7 @@ class ExecutionTimeCallback(Callback):
         self.history['val_loss'].append(logs.get('val_loss'))
         self.history['execution_time'].append(tf.timestamp() - self.timetaken)
 
+    def on_test_end(self, logs=None):
+        self.history['loss'].append(logs.get('loss'))
+        self.history['execution_time'].append(tf.timestamp() - self.timetaken)
+

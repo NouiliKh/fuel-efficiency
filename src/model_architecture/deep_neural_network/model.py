@@ -31,8 +31,9 @@ class Model:
         return custom_callback.history
 
     def evaluate(self, X, y):
-        history = self.model.evaluate(X, y)
-        return history
+        custom_callback = ExecutionTimeCallback()
+        self.model.evaluate(X, y, callbacks=[custom_callback])
+        return custom_callback.history
 
     def predict(self, x):
         return self.model.predict(x)
