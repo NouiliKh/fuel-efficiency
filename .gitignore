@@ -5,6 +5,7 @@ __pycache__/
 
 # Jet brains
 .idea
+
 # C extensions
 *.so
 

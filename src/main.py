@@ -1,5 +1,5 @@
 from database.database import Database
-from pipeline.preprocessing import Preprocess
+from data_manipulation.preprocessing import Preprocess
 
 from load_csv import load_df_to_postgres
 from model_architecture.baseline_model.model import Model as BaselineModel
@@ -51,5 +51,7 @@ if __name__ == "__main__":
     logs['DNN_multi_variable_train'] = DNN_multi_variable_train
     logs['DNN_multi_variable_evaluate'] = DNN_multi_variable_evaluate
 
-    evaluation = EvaluateAndCompare(logs)
+    EvaluateAndCompare(logs).plots()
+    EvaluateAndCompare(logs).compare()
+
 

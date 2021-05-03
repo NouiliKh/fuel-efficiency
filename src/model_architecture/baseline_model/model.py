@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import layers
-from model_architecture.custom_callbacks import ExecutionTimeCallback
+from model_architecture.custom_callbacks import ExecutionTimeCallbackFit, ExecutionTimeCallbackEvaluate
 
 
 class Model:
@@ -10,7 +10,6 @@ class Model:
         self.validation_split = 0.2
         self.num_classes = 1
         self.learning_rate = 0.1
-
         self.normalization_layer = normalization_layer
         self.model = self.initialize_model()
 
@@ -23,13 +22,13 @@ class Model:
         return model
 
     def fit(self, X, y):
-        custom_callback = ExecutionTimeCallback()
+        custom_callback = ExecutionTimeCallbackFit()
         self.model.fit(X, y, epochs=self.epochs, verbose=self.verbose, validation_split=self.validation_split
                        , callbacks=[custom_callback])
         return custom_callback.history
 
     def evaluate(self, X, y):
-        custom_callback = ExecutionTimeCallback()
+        custom_callback = ExecutionTimeCallbackEvaluate()
         self.model.evaluate(X, y, callbacks=[custom_callback])
         return custom_callback.history
 
