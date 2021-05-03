@@ -4,12 +4,13 @@ from model_architecture.custom_callbacks import ExecutionTimeCallbackFit, Execut
 
 
 class Model:
-    def __init__(self,  normalization_layer):
-        self.epochs = 100
-        self.verbose = 0
-        self.validation_split = 0.2
-        self.num_classes = 1
-        self.learning_rate = 0.1
+    def __init__(self, normalization_layer, epochs=100, verbose=0, validation_split=0.2, num_classes=1,
+                 learning_rate=0.01):
+        self.epochs = epochs
+        self.verbose = verbose
+        self.validation_split = validation_split
+        self.num_classes = num_classes
+        self.learning_rate = learning_rate
         self.normalization_layer = normalization_layer
         self.model = self.initialize_model()
 
