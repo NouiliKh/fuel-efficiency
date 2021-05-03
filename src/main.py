@@ -2,11 +2,16 @@ from database.database import Database
 from load_csv import load_df_to_postgres
 from pipeline_orchestrator.orchestrator import Orchestrator
 from database.model_metadata import fetch_model_with_accuracy_threshold
+import os
 
 
 if __name__ == "__main__":
     logs = {}
-    Database.initialise(database="fuel_consumption", user="baya", password="123456789", host="localhost")
+    database = os.environ['database']
+    user = os.environ['user']
+    password = os.environ['password']
+    host = os.environ['host']
+    Database.initialise(database=database, user=user, password=password, host=host)
     raw_dataset = load_df_to_postgres()
 
     # 1 variable
