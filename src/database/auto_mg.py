@@ -2,7 +2,7 @@ from io import StringIO
 from database.database import CursorFromConnectionPool
 
 
-class CRUDFromDf:
+class CRUD:
     def __init__(self, df, table_name):
         self.df = df.fillna(0)
         self.columns = tuple(df.columns)
@@ -14,3 +14,4 @@ class CRUDFromDf:
         buffer.seek(0)
         with CursorFromConnectionPool() as cursor:
             cursor.copy_from(buffer, self.table_name, sep=',')
+

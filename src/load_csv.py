@@ -1,5 +1,5 @@
 import pandas as pd
-from database.crud import CRUDFromDf
+from database.auto_mg import CRUD
 
 
 def load_csv_to_df():

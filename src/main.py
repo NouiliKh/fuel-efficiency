@@ -1,6 +1,7 @@
 from database.database import Database
 from load_csv import load_df_to_postgres
 from pipeline_orchestrator.orchestrator import Orchestrator
+from database.model_metadata import fetch_model_with_accuracy_threshold
 
 
 if __name__ == "__main__":
@@ -30,6 +31,11 @@ if __name__ == "__main__":
 
     # Evaluate and compare
     orchestrator.compare_and_evaluate()
+
+    # Get models that were trained in the last week with a Mean Absolute Error (MAE) of less than 2.5
+    threshold = 2.5
+    result = fetch_model_with_accuracy_threshold(threshold)
+
 
 
 
