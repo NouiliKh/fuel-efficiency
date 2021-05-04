@@ -1,5 +1,5 @@
 import pandas as pd
-from database.auto_mg import CRUD
+from database.auto_mg import create_from_file
 
 
 def load_csv_to_df():
@@ -16,5 +16,5 @@ def load_csv_to_df():
 
 def load_df_to_postgres():
     raw_dataset = load_csv_to_df()
-    # CRUDFromDf(raw_dataset, 'auto_mg').create_from_file()
+    create_from_file(raw_dataset)
     return raw_dataset

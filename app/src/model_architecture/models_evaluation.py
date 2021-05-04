@@ -1,8 +1,17 @@
 import matplotlib.pyplot as plt
 
 
-def plot_loss_train(history, model_name):
-
+def plot_train(history, model_name):
+    """
+    used to plot 3 plots: loss, val_loss and execution_time for all models presented in the history dictionary.
+    ...
+    Attributes
+    ----------
+    history : dict
+        dictionary presents logs of the training.
+    model_name: str
+        the model_name
+    """
     plt.subplot(1, 3, 1)
     plt.plot(history['loss'], label=model_name)
     plt.ylim([0, 10])
@@ -26,6 +35,16 @@ def plot_loss_train(history, model_name):
 
 
 def plot_evaluate(history, ylabel):
+    """
+    used to plot a bar plot for all models presented in the history dictionary.
+    ...
+    Attributes
+    ----------
+    history : dict
+        dictionary presents logs of the training.
+    y_label: str
+        the model_name
+    """
     plt.clf()
     plt.bar(*zip(*history.items()))
     plt.ylabel(ylabel)
@@ -38,7 +57,25 @@ def plot_evaluate(history, ylabel):
 
 
 class EvaluateAndCompare:
+    """
+     A class used to evaluate and compare between the models trained.
+     ...
+     Attributes
+     ----------
+     format string : str
+         format used to print the string in elegant format
+     training_data : dict
+         logs of the models while training
+     evaluation_data : bool
+         logs of the model while evaluating
 
+     Methods
+     -------
+     plots()
+         Plot the log data and save the plots.
+     compare()
+         Compare between the models and prints some results.
+     """
     def __init__(self, gathered_data):
         self.format_string = "{:<50}|{:<30}|{:<30}"
         self.training_data = {}
@@ -51,7 +88,7 @@ class EvaluateAndCompare:
 
     def plots(self):
         for key, item in self.training_data.items():
-            plot_loss_train(item, key)
+            plot_train(item, key)
         plt.savefig('../output/compare1.png')
         # plt.show()
 
@@ -73,6 +110,8 @@ class EvaluateAndCompare:
         most_performant = 'Not found'
 
         header = ['Model name', 'Loss', 'Execution time']
+        print('-------------------------------------------------------------------------------------------------------')
+
         print(self.format_string.format(*header))
         print('Training')
 

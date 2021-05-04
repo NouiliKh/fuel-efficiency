@@ -2,12 +2,20 @@ import time
 import tensorflow as tf
 from tensorflow.keras.callbacks import Callback
 
+# For some reason, I had to split the custom callback since I am using validation set while
+# training to avoid duplicated values
 
 class ExecutionTimeCallbackFit(Callback):
-
+    """
+    Creates a custom callback that logs the loss, val_loss and execution time for each epoch while training.
+    ...
+    Methods
+    -------
+    on_epoch_end(epochs, logs)
+        saves val_loss, loss and execution_time at the end of each epoch.
+    """
     def __init__(self):
         self.history = {'loss':[], 'val_loss':[], 'execution_time': []}
-
         # use this value as reference to calculate cummulative time taken
         self.timetaken = tf.timestamp()
 
@@ -18,6 +26,14 @@ class ExecutionTimeCallbackFit(Callback):
 
 
 class ExecutionTimeCallbackEvaluate(Callback):
+    """
+    Creates a custom callback that logs the loss, val_loss and execution time for each epoch while evaluating.
+    ...
+    Methods
+    -------
+    on_test_end(epochs, logs)
+        saves val_loss, loss and execution_time at the end of testing.
+    """
     def __init__(self):
         self.history = {'loss': 0, 'execution_time': 0}
 

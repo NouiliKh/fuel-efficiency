@@ -11,8 +11,8 @@ if __name__ == "__main__":
     user = os.getenv('user', '')
     password = os.getenv('password', '')
     host = os.getenv('host', 'localhost')
-    # Database.initialise(database=database, user=user, password=password, host=host)
-    Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='localhost')
+    Database.initialise(database=database, user=user, password=password, host=host)
+    # Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='localhost')
     raw_dataset = load_df_to_postgres()
 
     # 1 variable

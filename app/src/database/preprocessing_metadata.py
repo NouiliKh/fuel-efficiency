@@ -2,6 +2,13 @@ from database.database import CursorFromConnectionPool
 
 
 def create_from_dict(dict):
+    """
+    insert the data dictionary into preprocessing_metadata table.
+    Parameters
+    ----------
+    dict : dictionary
+        dictionary to insert into the preprocessing_metadata table
+    """
     with CursorFromConnectionPool() as cursor:
         cols = dict.keys()
         cols_str = ','.join(cols)

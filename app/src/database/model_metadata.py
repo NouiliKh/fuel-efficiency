@@ -2,6 +2,13 @@ from database.database import CursorFromConnectionPool
 
 
 def create_from_dict(dict):
+    """
+    insert the data dictionary into model_metadata table.
+    Parameters
+    ----------
+    dict : dictionary
+        dictionary to insert into the auto_mg table
+    """
     with CursorFromConnectionPool() as cursor:
         cols = dict.keys()
         cols_str = ','.join(cols)
@@ -14,6 +21,13 @@ def create_from_dict(dict):
 
 
 def fetch_model_with_accuracy_threshold(accuracy_threshold):
+    """
+    fetches the models with an accuracy higher than a certain threshold.
+    Parameters
+    ----------
+    accuracy_threshold : threshold
+        threshold to be considered
+    """
     with CursorFromConnectionPool() as cursor:
         sql_str = """SELECT * FROM model_metadata WHERE mae_test < ({}) AND created_at >= current_date - interval '7 days'""".format(accuracy_threshold)
         cursor.execute(sql_str)
