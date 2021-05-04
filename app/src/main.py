@@ -7,11 +7,12 @@ import os
 
 if __name__ == "__main__":
     logs = {}
-    database = os.environ['database']
-    user = os.environ['user']
-    password = os.environ['password']
-    host = os.environ['host']
+    database = os.getenv('database', '')
+    user = os.getenv('user', '')
+    password = os.getenv('password', '')
+    host = os.getenv('host', 'localhost')
     Database.initialise(database=database, user=user, password=password, host=host)
+    # Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='172.17.0.1')
     raw_dataset = load_df_to_postgres()
 
     # 1 variable

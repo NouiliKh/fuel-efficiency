@@ -10,11 +10,10 @@ COPY requirements.txt .
 # install dependencies
 RUN pip3 install -r requirements.txt
 
-# Set env variables
-RUN export .env
-
 # copy the content of the local src directory to the working directory
 COPY src/ .
+
+EXPOSE 3000
 
 # command to run on container start
 CMD [ "python", "./main.py" ]
