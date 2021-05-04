@@ -20,4 +20,3 @@ def create_from_file(df):
     buffer.seek(0)
     with CursorFromConnectionPool() as cursor:
         cursor.copy_from(buffer, 'auto_mg', sep=',')
-

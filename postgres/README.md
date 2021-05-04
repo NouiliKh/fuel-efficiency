@@ -1,11 +1,10 @@
 <!-- ABOUT THE PROJECT -->
-## Dockerized Python app
+## Dockerized postgres
 In this part of the project, you may find the dockerized version 
-of fuel efficiency app. \
+of postgres with created database and tables using the create_table.sql file. 
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
 In this section, I will explain how to get **only** this part of the project running on Ubuntu.
 
 ### Prerequisites
@@ -20,6 +19,6 @@ In this section, I will explain how to get **only** this part of the project run
 
 2. run docker-entrypoint.sh
    ```sh
-   sudo chmod +x app.sh
-   ./app.sh
+   sudo chmod +x docker-entrypoint.sh
+   ./docker-entrypoint.sh
    ```
