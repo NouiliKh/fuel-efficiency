@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def plot_loss_train(history, model_name):
@@ -27,13 +26,15 @@ def plot_loss_train(history, model_name):
 
 
 def plot_evaluate(history, ylabel):
+    plt.clf()
     plt.bar(*zip(*history.items()))
     plt.ylabel(ylabel)
     plt.xticks(rotation=20)
     plt.gcf().subplots_adjust(bottom=0.20)
     plt.legend()
     plt.grid(False)
-    plt.show()
+    plt.savefig('../output/compare_' + ylabel + '.png')
+    # plt.show()
 
 
 class EvaluateAndCompare:
@@ -51,7 +52,8 @@ class EvaluateAndCompare:
     def plots(self):
         for key, item in self.training_data.items():
             plot_loss_train(item, key)
-        plt.show()
+        plt.savefig('../output/compare1.png')
+        # plt.show()
 
         eval_bar_plot = {}
         time_bar_plot = {}

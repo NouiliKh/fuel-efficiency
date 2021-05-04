@@ -14,6 +14,7 @@ class Model:
         self.normalization_layer = normalization_layer
         self.model = self.initialize_model()
 
+
     def initialize_model(self):
         model = tf.keras.Sequential([
             self.normalization_layer,

@@ -9,7 +9,8 @@ COPY requirements.txt .
 
 # install dependencies
 RUN pip3 install -r requirements.txt
-
+RUN mkdir -p /root/.config/matplotlib
+RUN echo "backend : Agg" > /root/.config/matplotlib/matplotlibrc
 # copy the content of the local src directory to the working directory
 COPY src/ .
 
