@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS auto_mg (
 );
 
 CREATE TABLE IF NOT EXISTS preprocessing_metadata (
-    id SERIAL NOT NULL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     number_rows_train INT,
     number_rows_test INT,
 
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS preprocessing_metadata (
 );
 
 CREATE TABLE IF NOT EXISTS model_metadata (
-    id SERIAL NOT NULL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     epochs INT,
     learning_rate FLOAT,
     validation_split FLOAT,
