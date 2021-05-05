@@ -7,15 +7,21 @@ import os
 
 if __name__ == "__main__":
     logs = {}
+
+    # Getting database env variables
     database = os.getenv('database', '')
     user = os.getenv('user', '')
     password = os.getenv('password', '')
     host = os.getenv('host', 'localhost')
+
+    # Initialize database connection
     Database.initialise(database=database, user=user, password=password, host=host)
     # Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='localhost')
+
+    # Load csv into postgresql
     raw_dataset = load_df_to_postgres()
 
-    # 1 variable
+    # 1 variable model
     columns_to_use = ['Horsepower']
     label_columns = ['MPG']
 
@@ -23,7 +29,7 @@ if __name__ == "__main__":
     verbose = 0
     validation_split = 0.2
     num_classes = len(label_columns)
-    learning_rate = 0.01
+    learning_rate = 0.001
 
     orchestrator = Orchestrator(epochs=epochs, verbose=verbose, validation_split=validation_split,
                                 num_classes=num_classes, learning_rate=learning_rate)
@@ -32,7 +38,7 @@ if __name__ == "__main__":
     # multi variable
     columns_to_use = ['Cylinders', 'Displacement', 'Horsepower', 'Weight', 'Acceleration', 'Model Year', 'Origin']
     label_columns = ['MPG']
-    orchestrator.learning_rate = 0.001
+
     orchestrator.start('multi_variable', raw_dataset, columns_to_use, label_columns)
 
     # Evaluate and compare
@@ -47,12 +53,7 @@ if __name__ == "__main__":
     print(result)
 
     # if I want to use one of the models, all I need to do is this
+    print('_____________________________________________________________________')
+    print('using the retrieved model')
+    print(result[0])
     orchestrator.evaluate( raw_dataset, columns_to_use, label_columns, result[0])
-
-    a = 1
-
-
-
-
-
-

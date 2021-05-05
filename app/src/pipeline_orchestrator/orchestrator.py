@@ -35,6 +35,7 @@ class Orchestrator():
         self.verbose = verbose
         self.validation_split = validation_split
         self.num_classes = num_classes
+        self.learning_rate_baseline = 0.1
         self.learning_rate = learning_rate
         self.logs = {}
 
@@ -47,7 +48,7 @@ class Orchestrator():
         # Baseline model
         baseline = BaselineModel(normalization_layer, epochs=self.epochs, verbose=self.verbose,
                                  validation_split=self.validation_split, num_classes=self.num_classes,
-                                 learning_rate=self.learning_rate)
+                                 learning_rate=self.learning_rate_baseline)
         baseline_train, saved_model_name = baseline.fit(X, y)
         baseline_evaluate = baseline.evaluate(X_test, y_test)
 

@@ -1,5 +1,6 @@
 from io import StringIO
 from database.database import CursorFromConnectionPool
+import psycopg2
 
 
 def create_from_file(df):
@@ -19,4 +20,7 @@ def create_from_file(df):
     df.to_csv(buffer, index_label='id', header=False)
     buffer.seek(0)
     with CursorFromConnectionPool() as cursor:
-        cursor.copy_from(buffer, 'auto_mg', sep=',')
+        try:
+            cursor.copy_from(buffer, 'auto_mg', sep=',')
+        except psycopg2.errors.UniqueViolation as e:
+            print('Table already exist')
