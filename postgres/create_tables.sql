@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS auto_mg (
     id SERIAL NOT NULL PRIMARY KEY,
     mpg FLOAT,
-    cylinders INT,
+    cylinders FLOAT,
     displacement FLOAT,
     horsepower FLOAT,
     weight FLOAT,
     acceleration FLOAT,
-    model_year INT,
-    origin INT
+    model_year FLOAT ,
+    origin FLOAT
 );
 
 CREATE TABLE IF NOT EXISTS preprocessing_metadata (

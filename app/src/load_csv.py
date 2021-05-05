@@ -14,7 +14,7 @@ def load_csv_to_df():
                               sep=' ', skipinitialspace=True)
     '''
     # Load data from mirror
-    url = '../../auto-mpg.data-original.txt'
+    url = 'auto-mpg.data-original.txt'
     column_names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight',
                     'Acceleration', 'Model Year', 'Origin']
 
@@ -27,5 +27,5 @@ def load_csv_to_df():
 
 def load_df_to_postgres():
     raw_dataset = load_csv_to_df()
-    # create_from_file(raw_dataset)
+    create_from_file(raw_dataset)
     return raw_dataset

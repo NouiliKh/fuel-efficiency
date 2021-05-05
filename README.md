@@ -42,3 +42,18 @@ In machine learning engineering we try multiple combinations and if tracking the
 <!-- USAGE -->
 ## Description
 
+### Evaluation
+After training the model and evaluating with training set, I saved information about the loss, 
+validation_loss and execution time by creating a custom callback with tensorflow. Then I plotted these results using 
+matplotlib. You may find these plots on your Desktop inside **plots** folder.\
+
+### Tests
+I implemented a simple unit test in test.py file which allows to test the preprocessing class: whether the number of rows
+of training features and training label matches, and the number of rows of testing features and testing label matches as
+well.
+![unit test](images/unit_test.png)
+
+### Note
+Actually the archive.ics.uci.edu/ml/ got down for a couple of days which slowed my progress. It is still down until now
+and for that reason I chose to download the data from a **mirror** domain: https://data.world/uci.
+
