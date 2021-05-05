@@ -93,7 +93,11 @@ class Model:
              label
          """
         # Since I wanted to log the execution time as well as the loss and I created a custom callback function.
-        self.model.load_weights(self.checkpoint_path)
+        try:
+            self.model.load_weights(self.checkpoint_path)
+        except tf.errors.NotFoundError:
+            print('File not found (it may be deleted since it was generated in the last container)')
+            return 
         custom_callback = ExecutionTimeCallbackEvaluate()
         self.model.evaluate(X, y, callbacks=[custom_callback])
         return custom_callback.history
@@ -107,5 +111,9 @@ class Model:
          X : df/Series
              dataframe/series to get predictions for
          """
+        try:
+            self.model.load_weights(self.checkpoint_path)
+        except tf.errors.NotFoundError:
+            print('File not found to load (it may be deleted since it was generated in the last container)')
         self.model.load_weights(self.checkpoint_path)
         return self.model.predict(x)

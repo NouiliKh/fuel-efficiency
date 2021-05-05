@@ -1,5 +1,4 @@
 from database.database import CursorFromConnectionPool
-import pandas as pd
 
 
 def create_from_dict(dict):

@@ -26,19 +26,32 @@ In this section, I will explain how to get the whole project running on Ubuntu/ 
 ```
   
 ### Installation
-
 1. Clone the repo
 
+##### if you want to run the whole project together
 2. make the starting script executable
    ```sh
-   sudo chmod +x start_pp.sh
+   sudo chmod +x start_app.sh
    ```
-3. run the starting script ( you might want to  add **sudo** if your docker runs with super user privileges)
+3. run the starting script (you might want to add **sudo** if your docker runs with super user privileges)
    ```sh
    ./start_app.sh
    ```
-   
+##### if you want to run the two parts of project separately
 
+2. In one terminal open the current directory (you might want to add **sudo** if your docker runs with super user privileges)
+   ```sh
+   cd postgres/
+   sudo chmod +x docker-entrypoint.sh
+   ./docker-entrypoint.sh
+   ```
+3. In another terminal open the current directory (you might want to add **sudo** if your docker runs with super user privileges)
+   ```sh
+   cd app/
+   sudo chmod +x app-entrypoint.sh
+   ./app-entrypoint.sh
+   ```
+   
 <!-- USAGE EXAMPLES -->
 ## Metadata approach explanation
 In practice, usually I don't do model metadata or model storing like this. \
@@ -49,6 +62,22 @@ that meets that condition.\
 Thanks to DVC, each model corresponds to a specific branch, and the model will be retrieved automatically (from a cloud storage
 such as amazon s3 ) when checking out that branch.\
 In machine learning engineering we try multiple combinations and tracking the results of these combinations is beneficial.
+
+### After running the app one time
+The auto_mg table looks like this:
+![auto_mg](images/db1.png)
+
+The preprocessing metadata looks like this:
+![preprocess metadata](images/db3.png)
+
+The model preprocessing metadata have a foreign key to preprocessing metadata so that wer know which preprocessing and 
+model combination allowed us to have that accuracy.\
+In addition to that the name of the model is the **model_version + the time the model is created**. The model itself 
+is stored using that name so that we can access it directly.
+the table looks like this
+![model metadata](images/db2.png)
+
+
 
 <!-- USAGE -->
 ## Description

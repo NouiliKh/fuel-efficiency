@@ -13,6 +13,8 @@ app/models
 *.so
 
 /output
+/plots
+
 # Distribution / packaging
 .Python
 build/

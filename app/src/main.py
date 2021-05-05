@@ -56,4 +56,4 @@ if __name__ == "__main__":
     print('_____________________________________________________________________')
     print('using the retrieved model')
     print(result[0])
-    orchestrator.evaluate( raw_dataset, columns_to_use, label_columns, result[0])
+    orchestrator.evaluate(raw_dataset, columns_to_use, label_columns, result[0])
