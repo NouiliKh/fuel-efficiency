@@ -8,7 +8,8 @@ of postgres with created database and tables using the create_table.sql file.
 In this section, I will explain how to get **only** this part of the project running on Ubuntu.
 
 ### Prerequisites
-* docker
+* docker\
+  Install docker using this guide: https://docs.docker.com/engine/install/ubuntu/
   ```sh
     sudo apt install docker docker-compose 
   ```
@@ -19,7 +20,7 @@ In this section, I will explain how to get **only** this part of the project run
 
 2. make the starting script executable
    ```sh
-  sudo chmod +x docker-entrypoint.sh
+    sudo chmod +x docker-entrypoint.sh
    ```
 3. run the starting script ( you might want to  add **sudo** if your docker runs with super user privileges)
    ```sh

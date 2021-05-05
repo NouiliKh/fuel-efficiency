@@ -9,9 +9,10 @@ parametrizable Python application with metadata management.
 In this section, I will explain how to get the whole project running on Ubuntu.
 
 ### Prerequisites
-* docker
+* docker\
+  Install docker using this guide: https://docs.docker.com/engine/install/ubuntu/
   ```sh
-    sudo apt install docker docker-compose 
+    sudo apt install docker-compose 
   ```
   
 ### Installation
