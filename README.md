@@ -1,4 +1,4 @@
-[![Platform](https://img.shields.io/badge/platform-ios|linux-1abc9c.svg)](https://shields.io/)
+[![Platform](https://img.shields.io/badge/platform-macOS|linux-1abc9c.svg)](https://shields.io/)
 
 <!-- ABOUT THE PROJECT -->
 ## Fuel efficency app
@@ -17,7 +17,7 @@ In this section, I will explain how to get the whole project running on Ubuntu/ 
     sudo apt install docker docker-compose 
   ```
 
-* docker for macOs\
+* docker for macOS\
   Install docker using this guide: https://docs.docker.com/docker-for-mac/install/ \
   Run the docker desktop to run the docker daemon
 

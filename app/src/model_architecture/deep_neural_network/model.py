@@ -97,7 +97,7 @@ class Model:
             self.model.load_weights(self.checkpoint_path)
         except tf.errors.NotFoundError:
             print('File not found (it may be deleted since it was generated in the last container)')
-            return 
+            return
         custom_callback = ExecutionTimeCallbackEvaluate()
         self.model.evaluate(X, y, callbacks=[custom_callback])
         return custom_callback.history
