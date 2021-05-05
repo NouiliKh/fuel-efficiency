@@ -38,36 +38,46 @@ class Orchestrator():
         self.learning_rate = learning_rate
         self.logs = {}
 
-    def start(self, model_name, raw_dataset, columns_to_use, label_columns):
+    def start(self, plot_name, raw_dataset, columns_to_use, label_columns):
         preprocessor = Preprocess(dataset=raw_dataset, feature_column=columns_to_use, label_column=label_columns)
         X, y, normalization_layer = preprocessor.fit()
         X_test, y_test = preprocessor.evaluate()
-        preprocessing_metadata(X, y, X_test, y_test)
+        id_preprocessing_metadata = preprocessing_metadata(X, y, X_test, y_test)
 
         # Baseline model
         baseline = BaselineModel(normalization_layer, epochs=self.epochs, verbose=self.verbose,
                                  validation_split=self.validation_split, num_classes=self.num_classes,
                                  learning_rate=self.learning_rate)
-        baseline_train = baseline.fit(X, y)
+        baseline_train, saved_model_name = baseline.fit(X, y)
         baseline_evaluate = baseline.evaluate(X_test, y_test)
 
-        self.logs['baseline_' + model_name + '_train'] = baseline_train
-        self.logs['baseline_' + model_name + '_evaluate'] = baseline_evaluate
+        self.logs['baseline_' + plot_name + '_train'] = baseline_train
+        self.logs['baseline_' + plot_name + '_evaluate'] = baseline_evaluate
 
-        model_metadata(self.epochs, self.validation_split, self.learning_rate,
-                       baseline_train['loss'][-1], baseline_evaluate['loss'])
+        model_metadata('baseline', id_preprocessing_metadata, self.epochs, self.validation_split, self.learning_rate,
+                       baseline_train['loss'][-1], baseline_evaluate['loss'], saved_model_name)
 
         # DNN
         dnn = DNNModel(normalization_layer, epochs=self.epochs, verbose=self.verbose,
                        validation_split=self.validation_split, num_classes=self.num_classes,
                        learning_rate=self.learning_rate)
-        dnn_train = dnn.fit(X, y)
+        dnn_train, saved_model_name = dnn.fit(X, y)
         dnn_evaluate = dnn.evaluate(X_test, y_test)
-        self.logs['dnn_' + model_name + '_train'] = dnn_train
-        self.logs['dnn_' + model_name + '_evaluate'] = dnn_evaluate
+        self.logs['dnn_' + plot_name + '_train'] = dnn_train
+        self.logs['dnn_' + plot_name + '_evaluate'] = dnn_evaluate
 
-        model_metadata(self.epochs, self.validation_split, self.learning_rate,
-                       dnn_train['loss'][-1], dnn_evaluate['loss'])
+        model_metadata('dnn', id_preprocessing_metadata, self.epochs, self.validation_split, self.learning_rate,
+                       dnn_train['loss'][-1], dnn_evaluate['loss'], saved_model_name)
+
+    def evaluate(self, raw_dataset, columns_to_use, label_columns, model_name):
+        preprocessor = Preprocess(dataset=raw_dataset, feature_column=columns_to_use, label_column=label_columns)
+        X, y, normalization_layer = preprocessor.fit()
+        X_test, y_test = preprocessor.evaluate()
+
+        dnn = DNNModel(normalization_layer, epochs=self.epochs, verbose=self.verbose,
+                       validation_split=self.validation_split, num_classes=self.num_classes,
+                       learning_rate=self.learning_rate, model_name=model_name)
+        dnn.evaluate(X_test, y_test)
 
     def compare_and_evaluate(self):
         EvaluateAndCompare(self.logs).plots()

@@ -27,6 +27,8 @@ def preprocessing_metadata(X, y, X_test, y_test):
     number_of_output_nodes = y.shape[1]
 
     updated_time = datetime.now()
-    create_from_dict({'number_rows_train': number_of_rows_train, 'number_rows_test': number_of_rows_test,
-                      'size_train': size_train, 'size_test': size_test, 'number_features': number_features,
-                      'number_output_nodes': number_of_output_nodes, 'created_at': updated_time})
+    new_id = create_from_dict({'number_rows_train': number_of_rows_train, 'number_rows_test': number_of_rows_test,
+                               'size_train': size_train, 'size_test': size_test, 'number_features': number_features,
+                               'number_output_nodes': number_of_output_nodes, 'created_at': updated_time})
+    return new_id
+

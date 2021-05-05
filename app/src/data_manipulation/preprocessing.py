@@ -35,6 +35,34 @@ class ConvertCategoryToDummies:
         return NotImplemented
 
 
+class NormalizeColumnNames:
+    """
+    A class used to normalize column names. It is helpful if data is ot from multiple sources
+    ...
+    Attributes
+    ----------
+    Methods
+    -------
+    fit(X, y=None)
+         normalize column names
+    """
+    def __init__(self, column_name):
+        return NotImplemented
+
+    def fit(self, df):
+        """
+         normalize column names
+
+        Parameters
+        ----------
+        df : dataframe
+        """
+        df.columns = df.columns.str.lower()
+        return df
+
+    def evaluate(self):
+        return NotImplemented
+
 class Normalization:
     """
     A class used to create normalization layer thanks to the training data

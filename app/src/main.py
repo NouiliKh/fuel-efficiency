@@ -11,8 +11,8 @@ if __name__ == "__main__":
     user = os.getenv('user', '')
     password = os.getenv('password', '')
     host = os.getenv('host', 'localhost')
-    Database.initialise(database=database, user=user, password=password, host=host)
-    # Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='localhost')
+    # Database.initialise(database=database, user=user, password=password, host=host)
+    Database.initialise(database='fuel_consumption', user='baya', password='123456789', host='localhost')
     raw_dataset = load_df_to_postgres()
 
     # 1 variable
@@ -41,6 +41,15 @@ if __name__ == "__main__":
     # Get models that were trained in the last week with a Mean Absolute Error (MAE) of less than 2.5
     threshold = 2.5
     result = fetch_model_with_accuracy_threshold(threshold)
+
+    print('_____________________________________________________________________')
+    print('models that applies to that threshold')
+    print(result)
+
+    # if I want to use one of the models, all I need to do is this
+    orchestrator.evaluate( raw_dataset, columns_to_use, label_columns, result[0])
+
+    a = 1
 
 
 

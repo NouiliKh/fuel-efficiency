@@ -1,4 +1,5 @@
 from database.database import CursorFromConnectionPool
+import pandas as pd
 
 
 def create_from_dict(dict):
@@ -29,6 +30,8 @@ def fetch_model_with_accuracy_threshold(accuracy_threshold):
         threshold to be considered
     """
     with CursorFromConnectionPool() as cursor:
-        sql_str = """SELECT * FROM model_metadata WHERE mae_test < ({}) AND created_at >= current_date - interval '7 days'""".format(accuracy_threshold)
+        sql_str = """SELECT model_name FROM model_metadata WHERE mae_test < ({}) AND created_at >= current_date - interval '7 days'""".format(accuracy_threshold)
         cursor.execute(sql_str)
-        return cursor.fetchall()
+        return [r[0] for r in cursor.fetchall()]
+
+

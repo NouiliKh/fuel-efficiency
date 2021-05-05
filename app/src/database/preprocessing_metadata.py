@@ -16,6 +16,10 @@ def create_from_dict(dict):
         vals_str_list = ["%s"] * len(vals)
         vals_str = ", ".join(vals_str_list)
 
-        sql_str = """INSERT INTO preprocessing_metadata ({}) VALUES ({})""".format(cols_str, vals_str)
+        sql_str = """INSERT INTO preprocessing_metadata ({}) VALUES ({}) RETURNING id""".format(cols_str, vals_str)
         cursor.execute(sql_str, vals)
+        id_of_new_row = cursor.fetchone()[0]
+
+    return id_of_new_row
+
 

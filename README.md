@@ -18,11 +18,15 @@ In this section, I will explain how to get the whole project running on Ubuntu.
 
 1. Clone the repo
 
-2. run docker-entrypoint.sh
+2. make the starting script executable
    ```sh
    sudo chmod +x start_pp.sh
+   ```
+3. run the starting script ( you might want to  add **sudo** if your docker runs with super user privileges)
+   ```sh
    ./start_pp.sh
    ```
+   
 
 <!-- USAGE EXAMPLES -->
 ## Metadata approach explanation
@@ -34,3 +38,7 @@ that condition.\
 Thanks to DVC, each model corresponds to a specific branch, and the model will be retrieved automatically (from a cloud storage
 such as amazon s3 ) when checking out that branch.\
 In machine learning engineering we try multiple combinations and if tracking the results of these combinations if beneficial.
+
+<!-- USAGE -->
+## Description
+

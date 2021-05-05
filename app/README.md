@@ -18,8 +18,12 @@ In this section, I will explain how to get **only** this part of the project run
 
 1. Clone the repo
 
-2. run docker-entrypoint.sh
+2. make the starting script executable
    ```sh
    sudo chmod +x app.sh
+   ```
+3. run the starting script ( you might want to  add **sudo** if your docker runs with super user privileges)
+   ```sh
    ./app.sh
    ```
+   

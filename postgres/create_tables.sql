@@ -26,6 +26,9 @@ CREATE TABLE IF NOT EXISTS preprocessing_metadata (
 
 CREATE TABLE IF NOT EXISTS model_metadata (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    preprocessing_metadata_id UUID REFERENCES preprocessing_metadata,
+    model_name TEXT,
+    version TEXT,
     epochs INT,
     learning_rate FLOAT,
     validation_split FLOAT,
