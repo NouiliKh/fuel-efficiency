@@ -56,4 +56,4 @@ well.
 ### Note
 Actually the archive.ics.uci.edu/ml/ got down for a couple of days which slowed my progress. It is still down until now
 and for that reason I chose to download the data from a **mirror** domain: https://data.world/uci.
-
+![domain down](images/domain_down.png)
